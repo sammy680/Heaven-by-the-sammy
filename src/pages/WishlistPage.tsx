@@ -11,24 +11,37 @@ const WishlistPage = () => {
 
       {/* Display wishlist items */}
       {wishlist.length === 0 ? (
-        <p>Your wishlist is empty.</p>
-      ) : (
         <div>
+          <p>Your wishlist is empty.</p>
+          {/* Optional: Add a button to go back to shopping */}
+          <Link to="/" className="text-blue-500 underline">
+            Start shopping
+          </Link>
+        </div>
+      ) : (
+        <div className="wishlist-items grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {wishlist.map((product) => (
-            <div key={product.id} className="product-card mb-4 border p-4">
+            <div
+              key={product.id}
+              className="product-card border p-4 rounded-lg shadow-md"
+            >
               <img
                 src={product.imageSrc}
                 alt={product.title}
-                className="w-24 h-24 mb-2"
+                className="w-full h-48 object-cover mb-2"
               />
-              <h2 className="text-xl font-bold">{product.title}</h2>
-              <p>{product.price}</p>
+              <h2 className="text-xl font-bold mb-2">{product.title}</h2>
+              <p className="text-lg font-semibold">{product.price}</p>
+
+              {/* Remove from Wishlist button */}
               <button
                 onClick={() => removeFromWishlist(product.id)}
-                className="bg-red-500 text-white py-2 px-4 rounded mt-2"
+                className="bg-red-500 text-white py-2 px-4 rounded mt-2 w-full"
               >
                 Remove from Wishlist
               </button>
+
+              {/* Link to product page */}
               <Link
                 to={`/product/${product.id}`}
                 className="text-blue-500 mt-2 inline-block"

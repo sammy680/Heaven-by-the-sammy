@@ -1,34 +1,43 @@
 // src/components/ProductCard.tsx
 import React from "react";
-import { Product } from "../types"; // Assuming you have a type for product
+import { Product } from "../types";
+import { useWishlist } from "../context/WishlistContext";
 
 interface ProductCardProps {
   product: Product;
-  addToWishlist: () => void; // Wishlist handler function
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  product,
-  addToWishlist,
-}) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const { addToWishlist, removeFromWishlist, wishlist } = useWishlist();
+
+  const isProductInWishlist = wishlist.some((item) => item.id === product.id);
+
+  const handleWishlistToggle = () => {
+    if (isProductInWishlist) {
+      removeFromWishlist(product.id); // Remove product from wishlist
+    } else {
+      addToWishlist(product); // Add product to wishlist
+    }
+  };
+
   return (
-    <div className="product-card p-6 border rounded-md shadow-md">
+    <div className="product-card p-4 border rounded-lg shadow-md">
       <img
         src={product.imageSrc}
         alt={product.title}
-        className="w-full max-w-md mb-4"
+        className="w-full h-48 object-cover mb-2"
       />
-      <h1 className="text-3xl font-semibold">{product.title}</h1>
-      <p className="text-xl text-gray-700">{product.price}</p>
-      <div
-        className="description text-gray-600 mb-4"
-        dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-      />
+      <h2 className="text-xl font-bold mb-2">{product.title}</h2>
+      <p className="text-lg font-semibold">{product.price}</p>
+
+      {/* Wishlist button */}
       <button
-        onClick={addToWishlist}
-        className="bg-pink-600 text-white py-2 px-4 rounded hover:bg-pink-700"
+        onClick={handleWishlistToggle}
+        className={`${
+          isProductInWishlist ? "bg-red-500" : "bg-gray-500"
+        } text-white py-2 px-4 rounded mt-2 w-full`}
       >
-        ❤️ Add to Wishlist
+        {isProductInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
       </button>
     </div>
   );

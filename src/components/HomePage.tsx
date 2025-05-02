@@ -1,6 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { fetchProducts } from "../utils/shopify";
+import ProductCard from "../components/ProductCard";
 import { useWishlist } from "../context/WishlistContext";
+import { Product } from "../types";
+
+// Dummy data (you can replace this with actual product data)
+const products: Product[] = [
+  {
+    id: "1",
+    title: "Luxury White Shirt",
+    descriptionHtml: "<p>100% Cotton luxury shirt for everyday elegance.</p>",
+    price: "$129",
+    imageSrc: "/images/products/shirt1.jpg",
+  },
+  {
+    id: "2",
+    title: "Classic Black Jacket",
+    descriptionHtml: "<p>Premium leather jacket for any occasion.</p>",
+    price: "$299",
+    imageSrc: "/images/products/jacket1.jpg",
+  },
+  // Add more products here...
+];
 
 const HomePage = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -31,10 +52,11 @@ const HomePage = () => {
   };
 
   return (
-    <div>
-      <h1>Welcome to Heaven by The Sammy's</h1>
-      <div className="product-list">
+    <div className="home-page p-6">
+      <h1 className="text-3xl font-bold mb-4">Welcome to Heaven by The Sammy's</h1>
+        <div className="product-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
         {products.map((product) => (
+          
           <div key={product.node.id} className="product-card">
             <img
               src={product.node.featuredImage.originalSrc}
@@ -55,7 +77,6 @@ const HomePage = () => {
           </div>
         ))}
       </div>
-    </div>
   );
 };
 
