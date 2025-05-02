@@ -1,6 +1,5 @@
 // src/components/ProductCard.tsx
 import React from "react";
-import { Product } from "../types";
 import { useWishlist } from "../context/WishlistContext";
 
 interface ProductCardProps {

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard"; // Import the reusable ProductCard component
+import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 
 interface Review {
@@ -12,6 +13,7 @@ interface Review {
 
 const ProductPage = () => {
   const { id } = useParams();
+    const { addToCart } = useCart();
   const [reviews, setReviews] = useState<Review[]>([]);
   const { addToWishlist } = useWishlist(); // Access wishlist context
 
@@ -23,6 +25,13 @@ const ProductPage = () => {
     price: "$129",
     imageSrc: "/images/products/shirt1.jpg", // Replace with the actual image
   };
+  const product = {
+    id: id || "1",
+    title: "Luxury Black Hoodie",
+    descriptionHtml: "Premium quality hoodie for a luxury lifestyle.",
+    price: "69.99",
+    imageSrc: "https://via.placeholder.com/400x400.png?text=Product+Image",
+  };
 
   // Handle adding to wishlist
   const handleAddToWishlist = () => {
@@ -31,6 +40,17 @@ const ProductPage = () => {
 
   return (
     <div className="product-page p-6">
+      <img
+        src={product.imageSrc}
+        alt={product.title}
+        className="w-full max-w-sm mb-4"
+      />
+      <h1 className="text-2xl font-bold">{product.title}</h1>
+      <p
+        className="text-gray-700"
+        dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+      />
+      <p className="text-xl mt-2">${product.price}</p>
       {/* ProductCard Component that takes product data and wishlist handler */}
       <ProductCard product={dummyProduct} addToWishlist={handleAddToWishlist} />
 
@@ -50,6 +70,20 @@ const ProductPage = () => {
             </div>
           ))
         )}
+      </div>
+      <div className="mt-4 flex gap-3">
+        <button
+          onClick={() => addToCart(product)}
+          className="bg-black text-white py-2 px-4 rounded"
+        >
+          Add to Cart
+        </button>
+        <button
+          onClick={() => addToWishlist(product)}
+          className="border border-black py-2 px-4 rounded"
+        >
+          Add to Wishlist
+        </button>
       </div>
     </div>
   );

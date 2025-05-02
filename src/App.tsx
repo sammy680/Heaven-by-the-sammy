@@ -6,12 +6,14 @@ import ProductPage from "./pages/ProductPage";
 import WishlistPage from "./pages/WishlistPage"; // Ensure this page is created for wishlist
 import Navbar from "./components/Navbar";
 import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
 const App: React.FC = () => {
   return (
     <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/checkout" element={<CheckoutPage/>} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />{" "}
         <Route path="/cart" element={<CartPage />} />

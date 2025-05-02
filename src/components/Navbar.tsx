@@ -1,30 +1,25 @@
 // src/components/Navbar.tsx
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 
 const Navbar = () => {
+    const { cart } = useCart();
+    const { wishlist } = useWishlist();
+
   return (
-    <nav className="bg-black text-white px-6 py-4 flex justify-between items-center">
-      <h1 className="text-2xl font-bold">
-        <Link to="/">Heaven by The Sammy's</Link>
-      </h1>
-      <ul className="flex space-x-6 text-lg">
-        <li>
-          <Link to="/" className="hover:text-pink-400">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/wishlist" className="hover:text-pink-400">
-            Wishlist
-          </Link>
-        </li>
-        <li>
-          <Link to="/cart" className="hover:text-pink-400">
-            Cart
-          </Link>
-        </li>
-      </ul>
+    <nav className="bg-black text-white p-4 flex justify-between items-center shadow-md">
+      <Link to="/" className="text-xl font-bold">
+        Heaven by The Sammy's
+      </Link>
+
+      <div className="space-x-4">
+        <Link to="/">Home</Link>
+        <Link to="/wishlist">Wishlist ({wishlist.length})</Link>
+        <Link to="/cart">Cart ({cart.length})</Link>
+        <Link to="/checkout">Checkout</Link>
+      </div>
     </nav>
   );
 };
