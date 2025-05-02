@@ -13,7 +13,8 @@ interface Review {
 
 const ProductPage = () => {
   const { id } = useParams();
-    const { addToCart } = useCart();
+  const { addToCart } = useCart();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [reviews, setReviews] = useState<Review[]>([]);
   const { addToWishlist } = useWishlist(); // Access wishlist context
 

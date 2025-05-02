@@ -8,6 +8,11 @@ import Navbar from "./components/Navbar";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import { Toaster } from "react-hot-toast";
+import ReactDOM from "react-dom/client";
+import { CartProvider } from "./context/CartContext";
+import { WishlistProvider } from "./context/WishlistContext";
+import { BrowserRouter } from "react-router-dom";
+
 
 const App: React.FC = () => {
   return (
