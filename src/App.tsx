@@ -17,7 +17,6 @@ const App: React.FC = () => {
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />{" "}
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/cart" element={<CartPage />} /> {/* ⬅️ Add this */}
         {/* Wishlist route */}
       </Routes>
     </Router>

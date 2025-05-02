@@ -2,15 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client"; // Import from 'react-dom/client'
 import "./index.css";
 import App from "./App";
+import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-); // Create root element
-root.render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <WishlistProvider>
-      <App />
-    </WishlistProvider>
+    <CartProvider>
+      <WishlistProvider>
+        <App />
+      </WishlistProvider>
+    </CartProvider>
   </React.StrictMode>
 );
