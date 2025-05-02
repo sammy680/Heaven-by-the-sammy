@@ -4,7 +4,14 @@ import { Product } from "../types";
 import { useWishlist } from "../context/WishlistContext";
 
 interface ProductCardProps {
-  product: Product;
+  product: {
+    id: string;
+    title: string;
+    descriptionHtml: string;
+    price: string;
+    imageSrc: string;
+  };
+  addToWishlist: () => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
@@ -42,5 +49,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     </div>
   );
 };
+
 
 export default ProductCard;
