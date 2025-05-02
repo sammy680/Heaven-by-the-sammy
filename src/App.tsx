@@ -7,13 +7,16 @@ import WishlistPage from "./pages/WishlistPage"; // Ensure this page is created 
 import Navbar from "./components/Navbar";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import { Toaster } from "react-hot-toast";
+
 const App: React.FC = () => {
   return (
     <Router>
       <Navbar />
       <Routes>
+        <Toaster position="top-right" reverseOrder={false} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/checkout" element={<CheckoutPage/>} />
+        <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />{" "}
         <Route path="/cart" element={<CartPage />} />

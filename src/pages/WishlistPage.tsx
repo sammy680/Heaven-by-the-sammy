@@ -1,6 +1,9 @@
 import React from "react";
 import { useWishlist } from "../context/WishlistContext";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+
+
 
 const WishlistPage = () => {
   const { wishlist, removeFromWishlist } = useWishlist();
@@ -11,11 +14,10 @@ const WishlistPage = () => {
 
       {/* Display wishlist items */}
       {wishlist.length === 0 ? (
-        <div>
-          <p>Your wishlist is empty.</p>
-          {/* Optional: Add a button to go back to shopping */}
-          <Link to="/" className="text-blue-500 underline">
-            Start shopping
+        <div className="text-center py-10">
+          <p className="text-lg mb-4">Your wishlist is empty 💔</p>
+          <Link to="/" className="text-white bg-black px-4 py-2 rounded">
+            Start Shopping
           </Link>
         </div>
       ) : (
@@ -23,24 +25,25 @@ const WishlistPage = () => {
           {wishlist.map((product) => (
             <div
               key={product.id}
-              className="product-card border p-4 rounded-lg shadow-md"
+              className="product-card border p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow"
             >
               <img
                 src={product.imageSrc}
                 alt={product.title}
-                className="w-full h-48 object-cover mb-2"
+                className="w-full h-48 object-cover mb-2 rounded-md"
               />
               <h2 className="text-xl font-bold mb-2">{product.title}</h2>
               <p className="text-lg font-semibold">{product.price}</p>
-
               {/* Remove from Wishlist button */}
               <button
-                onClick={() => removeFromWishlist(product.id)}
+                onClick={() => {
+                  removeFromWishlist(product.id);
+                  toast.success(`${product.title} removed from wishlist`);
+                }}
                 className="bg-red-500 text-white py-2 px-4 rounded mt-2 w-full"
               >
                 Remove from Wishlist
               </button>
-
               {/* Link to product page */}
               <Link
                 to={`/product/${product.id}`}
