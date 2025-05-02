@@ -6,3 +6,13 @@ export interface Product {
   price: string;
   imageSrc: string;
 }
+
+// src/types.ts
+
+export interface CartItem {
+  id: string;
+  title: string;
+  price: string;
+  imageSrc: string;
+  quantity: number;
+}
