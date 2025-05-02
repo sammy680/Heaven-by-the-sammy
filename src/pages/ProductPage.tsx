@@ -11,9 +11,9 @@ interface Review {
 }
 
 const ProductPage = () => {
-  const { productId } = useParams();
+  const { id } = useParams();
   const [reviews, setReviews] = useState<Review[]>([]);
-  const { addToWishlist } = useWishlist();
+  const { addToWishlist } = useWishlist(); // Access wishlist context
 
   // Dummy product data (for now)
   const dummyProduct = {
@@ -21,27 +21,35 @@ const ProductPage = () => {
     title: "Luxury White Shirt",
     descriptionHtml: "<p>100% Cotton luxury shirt for everyday elegance.</p>",
     price: "$129",
-    imageSrc: "/images/products/shirt1.jpg",
+    imageSrc: "/images/products/shirt1.jpg", // Replace with the actual image
   };
 
   // Handle adding to wishlist
   const handleAddToWishlist = () => {
-    addToWishlist(dummyProduct);
+    addToWishlist(dummyProduct); // Add the current product to wishlist
   };
 
   return (
-    <div>
+    <div className="product-page p-6">
+      {/* ProductCard Component that takes product data and wishlist handler */}
       <ProductCard product={dummyProduct} addToWishlist={handleAddToWishlist} />
 
       {/* Reviews Section */}
-      <div className="reviews">
-        <h3>Product Reviews</h3>
-        {reviews.map((review, index) => (
-          <div key={index} className="review-card">
-            <p>{review.review}</p>
-            <p>Rating: {review.rating} Stars</p>
-          </div>
-        ))}
+      <div className="reviews mt-6">
+        <h3 className="text-2xl font-semibold">Product Reviews</h3>
+        {reviews.length === 0 ? (
+          <p>No reviews yet. Be the first to review this product!</p>
+        ) : (
+          reviews.map((review, index) => (
+            <div
+              key={index}
+              className="review-card mb-4 p-4 border rounded-md shadow-md"
+            >
+              <p>{review.review}</p>
+              <p>Rating: {review.rating} Stars</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

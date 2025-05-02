@@ -1,10 +1,10 @@
 // src/components/ProductCard.tsx
 import React from "react";
-import { Product } from "../types"; // Correctly import the Product type
+import { Product } from "../types"; // Assuming you have a type for product
 
 interface ProductCardProps {
-  product: Product; // Use the Product type for props
-  addToWishlist: () => void;
+  product: Product;
+  addToWishlist: () => void; // Wishlist handler function
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -12,23 +12,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
   addToWishlist,
 }) => {
   return (
-    <div className="product-card p-6">
-      {/* Product Image */}
+    <div className="product-card p-6 border rounded-md shadow-md">
       <img
         src={product.imageSrc}
         alt={product.title}
         className="w-full max-w-md mb-4"
       />
-
-      {/* Product Details */}
-      <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
-      <p className="text-xl text-gray-700 mb-4">{product.price}</p>
+      <h1 className="text-3xl font-semibold">{product.title}</h1>
+      <p className="text-xl text-gray-700">{product.price}</p>
       <div
-        className="text-gray-600 mb-4"
+        className="description text-gray-600 mb-4"
         dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
       />
-
-      {/* Add to Wishlist Button */}
       <button
         onClick={addToWishlist}
         className="bg-pink-600 text-white py-2 px-4 rounded hover:bg-pink-700"
