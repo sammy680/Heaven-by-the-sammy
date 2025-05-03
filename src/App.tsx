@@ -11,6 +11,7 @@ import { WishlistProvider } from "./context/WishlistContext";
 import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import { Toaster } from "react-hot-toast";
+import ProductDetailPage from "./pages/ProductDetailPage";
 // import ReactDOM from "react-dom/client";
 // import { CartProvider } from "./context/CartContext";
 
@@ -19,7 +20,7 @@ const App: React.FC = () => {
   return (
     <WishlistProvider>
       <CartProvider>
-        <Toaster/>
+        <Toaster />
         <Router>
           <Navbar />
           <Routes>
@@ -28,6 +29,7 @@ const App: React.FC = () => {
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/wishlist" element={<WishlistPage />} />{" "}
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/product/:id" element={<ProductDetailPage />} />
             {/* Wishlist route */}
           </Routes>
         </Router>

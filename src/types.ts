@@ -2,7 +2,7 @@
 export interface Product {
   id: string;
   title: string;
-  descriptionHtml: string;
+  descriptionHtml?: string;
   price: string;
   imageSrc: string;
 }
@@ -15,4 +15,5 @@ export interface CartItem {
   price: string;
   imageSrc: string;
   quantity: number;
+  descriptionHTML?: string;
 }
