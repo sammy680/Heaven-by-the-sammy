@@ -10,7 +10,7 @@ const WishlistPage = () => {
 
   return (
     <div className="wishlist-page p-6">
-      <h1 className="text-3xl font-bold mb-6">Your Wishlist</h1>
+      <h1 className="text-3xl font-bold mb-6">💖 Your Wishlist</h1>
 
       {wishlist.length === 0 ? (
         <div className="text-center py-12">
@@ -23,11 +23,11 @@ const WishlistPage = () => {
           </Link>
         </div>
       ) : (
-        <div className="wishlist-items grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="wishlist-items grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {wishlist.map((product) => (
             <div
               key={product.id}
-              className="product-card border p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+              className="product-card border p-4 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
             >
               <img
                 src={product.imageSrc || "/images/default-product.jpg"}
@@ -36,6 +36,7 @@ const WishlistPage = () => {
               />
               <h2 className="text-lg font-semibold">{product.title}</h2>
               <p className="text-gray-700 font-medium mb-1">${product.price}</p>
+
               {/* View Product */}
               <Link
                 to={`/product/${product.id}`}
@@ -43,13 +44,14 @@ const WishlistPage = () => {
               >
                 View Product
               </Link>
+
               {/* Remove Button */}
               <button
                 onClick={() => {
                   removeFromWishlist(product.id);
                   toast.success(`${product.title} removed from wishlist`);
                 }}
-                className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600"
+                className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition-all duration-300"
               >
                 Remove from Wishlist
               </button>
