@@ -1,20 +1,16 @@
 // src/App.tsx
 import React from "react";
-import HomePage from "./components/HomePage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./components/HomePage";
 import ProductPage from "./pages/ProductPage";
-import WishlistPage from "./pages/WishlistPage"; // Ensure this page is created for wishlist
-import Navbar from "./components/Navbar";
+import WishlistPage from "./pages/WishlistPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import Navbar from "./components/Navbar";
 import { WishlistProvider } from "./context/WishlistContext";
-import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import { Toaster } from "react-hot-toast";
 import ProductDetailPage from "./pages/ProductDetailPage";
-// import ReactDOM from "react-dom/client";
-// import { CartProvider } from "./context/CartContext";
-
 
 const App: React.FC = () => {
   return (
@@ -25,12 +21,10 @@ const App: React.FC = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/wishlist" element={<WishlistPage />} />{" "}
-            <Route path="/cart" element={<CartPage />} />
             <Route path="/product/:id" element={<ProductDetailPage />} />
-            {/* Wishlist route */}
+            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </Router>
       </CartProvider>
