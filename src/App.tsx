@@ -14,7 +14,7 @@ import ScrollToTop from "./components/ScroolToTop";
 import OrderSuccessPage from "./pages/OrderSuccessPages";
 import LoginSignupPage from "./pages/LoginSignupPage";
 import UserProfilePage from "./pages/UserProfilePage";
-
+import MyOrdersPage from "./pages/MyOrderPage";
 const App: React.FC = () => {
   return (
     <WishlistProvider>
@@ -24,6 +24,7 @@ const App: React.FC = () => {
           <Navbar />
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Routes>
+              <Route path="/orders" element={<MyOrdersPage />} />
               <Route path="/profile" element={<UserProfilePage />} />
               <Route path="/auth" element={<LoginSignupPage />} />
               <Route path="/order-success" element={<OrderSuccessPage />} />

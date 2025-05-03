@@ -1,28 +1,23 @@
 // src/pages/UserProfilePage.tsx
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 
 const UserProfilePage = () => {
-  const [profileData, setProfileData] = useState({
+  const [userData, setUserData] = useState({
     name: "Sammy",
     email: "sammy@example.com",
-    address: "123 Fashion Street, Mumbai",
-    paymentMethod: "Credit Card",
+    address: "123 Heaven Street, Fashion City",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setProfileData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSave = () => {
-    toast.success("✅ Profile updated successfully!");
-    // Save logic can go here (localStorage, backend API, etc.)
+    setIsEditing(false);
+    alert("Profile updated (not saved permanently – dummy data).");
   };
 
   return (
@@ -30,48 +25,65 @@ const UserProfilePage = () => {
       <h1 className="text-3xl font-bold mb-6">👤 My Profile</h1>
 
       <div className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          value={profileData.name}
-          onChange={handleChange}
-          className="w-full border rounded px-4 py-2"
-          placeholder="Full Name"
-        />
-        <input
-          type="email"
-          name="email"
-          value={profileData.email}
-          onChange={handleChange}
-          className="w-full border rounded px-4 py-2"
-          placeholder="Email Address"
-        />
-        <input
-          type="text"
-          name="address"
-          value={profileData.address}
-          onChange={handleChange}
-          className="w-full border rounded px-4 py-2"
-          placeholder="Shipping Address"
-        />
-        <select
-          name="paymentMethod"
-          value={profileData.paymentMethod}
-          onChange={handleChange}
-          className="w-full border rounded px-4 py-2"
-        >
-          <option value="Credit Card">Credit Card</option>
-          <option value="UPI">UPI</option>
-          <option value="PayPal">PayPal</option>
-          <option value="Cash on Delivery">Cash on Delivery</option>
-        </select>
+        <div>
+          <label className="block text-sm font-medium">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={userData.name}
+            onChange={handleChange}
+            disabled={!isEditing}
+            className={`w-full border px-3 py-2 rounded ${
+              isEditing ? "bg-white" : "bg-gray-100"
+            }`}
+          />
+        </div>
 
-        <button
-          onClick={handleSave}
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-        >
-          Save Changes
-        </button>
+        <div>
+          <label className="block text-sm font-medium">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={userData.email}
+            onChange={handleChange}
+            disabled={!isEditing}
+            className={`w-full border px-3 py-2 rounded ${
+              isEditing ? "bg-white" : "bg-gray-100"
+            }`}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium">Address</label>
+          <input
+            type="text"
+            name="address"
+            value={userData.address}
+            onChange={handleChange}
+            disabled={!isEditing}
+            className={`w-full border px-3 py-2 rounded ${
+              isEditing ? "bg-white" : "bg-gray-100"
+            }`}
+          />
+        </div>
+
+        <div className="mt-4 flex gap-4">
+          {isEditing ? (
+            <button
+              onClick={handleSave}
+              className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
+            >
+              Save Changes
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsEditing(true)}
+              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+            >
+              Edit Profile
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
