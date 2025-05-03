@@ -1,5 +1,16 @@
 // src/pages/UserProfilePage.tsx
 import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
+
+const { logout } = useAuth();
+const navigate = useNavigate();
+
+const handleLogout = () => {
+  logout(); // Clear login
+  navigate("/login"); // Redirect to login
+};
 
 const UserProfilePage = () => {
   const [userData, setUserData] = useState({
@@ -7,6 +18,11 @@ const UserProfilePage = () => {
     email: "sammy@example.com",
     address: "123 Heaven Street, Fashion City",
   });
+  const SomeComponent = () => {
+    const { isAuthenticated, login, logout } = useAuth();
+
+    // use them safely here
+  };
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -66,6 +82,12 @@ const UserProfilePage = () => {
             }`}
           />
         </div>
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 mt-6"
+        >
+          Logout
+        </button>
 
         <div className="mt-4 flex gap-4">
           {isEditing ? (

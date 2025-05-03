@@ -20,6 +20,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProfilePage from "./pages/UserProfilePage";
 import OrdersPage from "./pages/OrderPage";
+import ProfileEditPage from "./pages/ProfileEditPage";
 const App: React.FC = () => {
   return (
     <AuthProvider>
@@ -30,7 +31,14 @@ const App: React.FC = () => {
             <Navbar />
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
               <Routes>
-                import OrdersPage from "./pages/OrdersPage"; // Add this
+                <Route
+                  path="/profile/edit"
+                  element={
+                    <ProtectedRoute>
+                      <ProfileEditPage />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route
                   path="/orders"
                   element={
