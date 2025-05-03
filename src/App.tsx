@@ -12,6 +12,8 @@ import { CartProvider } from "./context/CartContext";
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/ScroolToTop";
 import OrderSuccessPage from "./pages/OrderSuccessPages";
+import LoginSignupPage from "./pages/LoginSignupPage";
+import UserProfilePage from "./pages/UserProfilePage";
 
 const App: React.FC = () => {
   return (
@@ -22,6 +24,8 @@ const App: React.FC = () => {
           <Navbar />
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Routes>
+              <Route path="/profile" element={<UserProfilePage />} />
+              <Route path="/auth" element={<LoginSignupPage />} />
               <Route path="/order-success" element={<OrderSuccessPage />} />
               <Route path="/" element={<HomePage />} />
               <Route path="/product/:id" element={<ProductDetailPage />} />
