@@ -11,9 +11,11 @@ const HomePage = () => {
       const productsData = await fetchProducts();
       setProducts(productsData);
     };
+    
 
     getProducts();
   }, []);
+  
 
   const handleAddToWishlist = (product: any) => {
     const newProduct = {
@@ -34,7 +36,10 @@ const HomePage = () => {
     <div>
       <h1>Welcome to Heaven by The Sammy's</h1>
       <div className="product-list">
-        {products.map((product) => (
+        {products.length === 0 ? (
+        <p style={{ textAlign: "center", marginTop: "2rem" }}>No products to display. Connect your Shopify store to fetch products.</p>
+        ) : (
+        products.map((product) => (
           <div key={product.node.id} className="product-card">
             <img
               src={product.node.featuredImage.originalSrc}
@@ -53,8 +58,8 @@ const HomePage = () => {
               </button>
             )}
           </div>
-        ))}
-      </div>
+        ))
+      )}</div>
     </div>
   );
 };

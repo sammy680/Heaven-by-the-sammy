@@ -1,9 +1,9 @@
-// src/pages/ProductPage.tsx
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import ProductCard from "../components/ProductCard"; // Import the reusable ProductCard component
+import ProductCard from "../components/ProductCard";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
+import { dummyProducts } from "../data/productData";
 
 interface Review {
   productId: string;
@@ -14,30 +14,10 @@ interface Review {
 const ProductPage = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { addToWishlist } = useWishlist();
   const [reviews, setReviews] = useState<Review[]>([]);
-  const { addToWishlist } = useWishlist(); // Access wishlist context
 
-  // Dummy product data (for now)
-  const dummyProduct = {
-    id: "123",
-    title: "Luxury White Shirt",
-    descriptionHtml: "<p>100% Cotton luxury shirt for everyday elegance.</p>",
-    price: "$129",
-    imageSrc: "/images/products/shirt1.jpg", // Replace with the actual image
-  };
-  const product = {
-    id: id || "1",
-    title: "Luxury Black Hoodie",
-    descriptionHtml: "Premium quality hoodie for a luxury lifestyle.",
-    price: "69.99",
-    imageSrc: "https://via.placeholder.com/400x400.png?text=Product+Image",
-  };
-
-  // Handle adding to wishlist
-  const handleAddToWishlist = () => {
-    addToWishlist(dummyProduct); // Add the current product to wishlist
-  };
+  const product = dummyProducts.find((p) => p.id === id) || dummyProducts[0];
 
   return (
     <div className="product-page p-6">
@@ -52,8 +32,21 @@ const ProductPage = () => {
         dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
       />
       <p className="text-xl mt-2">${product.price}</p>
-      {/* ProductCard Component that takes product data and wishlist handler */}
-      <ProductCard product={dummyProduct} addToWishlist={handleAddToWishlist} />
+
+      <div className="mt-4 flex gap-3">
+        <button
+          onClick={() => addToCart(product)}
+          className="bg-black text-white py-2 px-4 rounded"
+        >
+          Add to Cart
+        </button>
+        <button
+          onClick={() => addToWishlist(product)}
+          className="border border-black py-2 px-4 rounded"
+        >
+          Add to Wishlist
+        </button>
+      </div>
 
       {/* Reviews Section */}
       <div className="reviews mt-6">
@@ -71,20 +64,6 @@ const ProductPage = () => {
             </div>
           ))
         )}
-      </div>
-      <div className="mt-4 flex gap-3">
-        <button
-          onClick={() => addToCart(product)}
-          className="bg-black text-white py-2 px-4 rounded"
-        >
-          Add to Cart
-        </button>
-        <button
-          onClick={() => addToWishlist(product)}
-          className="border border-black py-2 px-4 rounded"
-        >
-          Add to Wishlist
-        </button>
       </div>
     </div>
   );
