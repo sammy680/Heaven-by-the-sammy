@@ -1,5 +1,4 @@
 // src/pages/WishlistPage.tsx
-
 import React from "react";
 import { useWishlist } from "../context/WishlistContext";
 import { Link } from "react-router-dom";

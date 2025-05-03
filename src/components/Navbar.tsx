@@ -1,3 +1,4 @@
+// src/components/Navbar.tsx
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useCart } from "../context/CartContext";
@@ -9,7 +10,7 @@ const Navbar = () => {
   const location = useLocation();
 
   const linkClasses = (path: string) =>
-    `px-3 py-2 rounded-md text-sm font-medium ${
+    `px-3 py-2 rounded-md text-sm font-medium transition ${
       location.pathname === path
         ? "bg-white text-black"
         : "hover:bg-white hover:text-black"

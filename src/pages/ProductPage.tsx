@@ -29,7 +29,7 @@ const ProductPage = () => {
       <h1 className="text-2xl font-bold">{product.title}</h1>
       <p
         className="text-gray-700"
-        dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+        dangerouslySetInnerHTML={{ __html: product.descriptionHtml as string}}
       />
       <p className="text-xl mt-2">${product.price}</p>
 

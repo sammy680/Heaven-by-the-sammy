@@ -30,11 +30,19 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 max-w-5xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">🧾 Checkout</h1>
 
       {cart.length === 0 ? (
-        <p className="text-lg">Your cart is currently empty.</p>
+        <div className="text-center">
+          <p className="text-lg mb-4">Your cart is currently empty.</p>
+          <button
+            onClick={() => navigate("/")}
+            className="bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition"
+          >
+            Start Shopping
+          </button>
+        </div>
       ) : (
         <div className="space-y-6">
           {cart.map((item) => (
@@ -58,12 +66,14 @@ const CheckoutPage = () => {
           ))}
 
           <div className="text-right text-2xl font-bold border-t pt-4">
-            Total Amount: ${totalAmount.toFixed(2)}
+            <span>Total Amount: </span>
+            <span>${totalAmount.toFixed(2)}</span>
           </div>
 
+          {/* Checkout Button */}
           <button
             onClick={handleCheckout}
-            className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded w-full text-lg transition"
+            className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded w-full text-lg transition-all duration-300"
           >
             Proceed to Checkout
           </button>
