@@ -19,7 +19,7 @@ const App: React.FC = () => {
     <Router>
       <Navbar />
       <Routes>
-        <Toaster position="top-right" reverseOrder={false} />
+        
         <Route path="/" element={<HomePage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
