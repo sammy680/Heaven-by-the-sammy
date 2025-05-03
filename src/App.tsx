@@ -17,20 +17,63 @@ import UserProfilePage from "./pages/UserProfilePage";
 import MyOrdersPage from "./pages/MyOrderPage";
 import AuthPage from "./pages/AuthPage";
 import { AuthProvider } from "./context/AuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
 import ProfilePage from "./pages/UserProfilePage";
+import ProtectedRoute from "./components/ProtectedRoute";
 import OrdersPage from "./pages/OrderPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
+
 const App: React.FC = () => {
   return (
     <AuthProvider>
-      <WishlistProvider>
         <CartProvider>
+      <WishlistProvider>
+        <App/>
           <Router>
             <ScrollToTop />
             <Navbar />
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
               <Routes>
+                {/* Public Routes */}
+                <Route path="/" element={<HomePage />} />
+                <Route path="/auth" element={<LoginSignupPage />} />
+                <Route path="/product/:id" element={<ProductDetailPage />} />
+                <Route path="/order-success" element={<OrderSuccessPage />} />
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/productPage" element = {<ProductPage/>} />
+                <Route path="/my-order" element = {<MyOrdersPage/>} />
+                
+                <Route
+                  path="/wishlist"
+                  element={
+                    <ProtectedRoute>
+                      <WishlistPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/cart"
+                  element={
+                    <ProtectedRoute>
+                      <CartPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                    <ProtectedRoute>
+                      <CheckoutPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <UserProfilePage />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route
                   path="/profile/edit"
                   element={
@@ -47,46 +90,12 @@ const App: React.FC = () => {
                     </ProtectedRoute>
                   }
                 />
-                <Route
-                  path="/checkout"
-                  element={
-                    <ProtectedRoute>
-                      <CheckoutPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/wishlist"
-                  element={
-                    <ProtectedRoute>
-                      <WishlistPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/profile"
-                  element={
-                    <ProtectedRoute>
-                      <ProfilePage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/auth" element={<AuthPage />} />
-                <Route path="/orders" element={<MyOrdersPage />} />
-                <Route path="/profile" element={<UserProfilePage />} />
-                <Route path="/auth" element={<LoginSignupPage />} />
-                <Route path="/order-success" element={<OrderSuccessPage />} />
-                <Route path="/" element={<HomePage />} />
-                <Route path="/product/:id" element={<ProductDetailPage />} />
-                <Route path="/wishlist" element={<WishlistPage />} />
-                <Route path="/cart" element={<CartPage />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
               </Routes>
             </main>
             <Toaster position="top-right" />
           </Router>
-        </CartProvider>
       </WishlistProvider>
+        </CartProvider>
     </AuthProvider>
   );
 };

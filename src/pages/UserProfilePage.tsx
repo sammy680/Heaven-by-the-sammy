@@ -13,11 +13,12 @@ const handleLogout = () => {
 };
 
 const UserProfilePage = () => {
-  const [userData, setUserData] = useState({
-    name: "Sammy",
-    email: "sammy@example.com",
-    address: "123 Heaven Street, Fashion City",
-  });
+  const { isAuthenticated } = useAuth();
+
+  console.log("Is Authenticated?", isAuthenticated); // Debug line
+
+  return <div>User Profile</div>;
+};
   const SomeComponent = () => {
     const { isAuthenticated, login, logout } = useAuth();
 
