@@ -19,11 +19,9 @@ const CheckoutPage = () => {
       return;
     }
 
-    // Simulate checkout success
-    toast.success("Checkout successful! 🎉");
+    toast.success("🎉 Checkout successful!");
     clearCart();
 
-    // Redirect after checkout
     setTimeout(() => {
       navigate("/");
     }, 2000);
@@ -54,23 +52,21 @@ const CheckoutPage = () => {
                 <h2 className="text-xl font-semibold">{item.title}</h2>
                 <p className="text-gray-600">Quantity: {item.quantity}</p>
                 <p className="text-gray-600">
-                  Price: ${parseFloat(item.price).toFixed(2)}
+                  Price: ₹{parseFloat(item.price).toFixed(2)}
                 </p>
               </div>
               <div className="text-right">
                 <p className="font-bold">
-                  Total: ${(parseFloat(item.price) * item.quantity).toFixed(2)}
+                  Total: ₹{(parseFloat(item.price) * item.quantity).toFixed(2)}
                 </p>
               </div>
             </div>
           ))}
 
           <div className="text-right text-2xl font-bold border-t pt-4">
-            <span>Total Amount: </span>
-            <span>${totalAmount.toFixed(2)}</span>
+            <span>Total Amount: ₹{totalAmount.toFixed(2)}</span>
           </div>
 
-          {/* Checkout Button */}
           <button
             onClick={handleCheckout}
             className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded w-full text-lg transition-all duration-300"

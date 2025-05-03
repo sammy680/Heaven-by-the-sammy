@@ -1,4 +1,3 @@
-// src/pages/CartPage.tsx
 import React from "react";
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
@@ -7,12 +6,11 @@ import toast from "react-hot-toast";
 const CartPage = () => {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
 
-  const getTotalPrice = () => {
-    return cart.reduce(
+  const getTotalPrice = () =>
+    cart.reduce(
       (total, item) => total + parseFloat(item.price) * item.quantity,
       0
     );
-  };
 
   const handleQuantityChange = (id: string, value: string) => {
     const qty = parseInt(value);
@@ -30,7 +28,7 @@ const CartPage = () => {
 
   const handleClearCart = () => {
     clearCart();
-    toast.success("Cart cleared successfully");
+    toast.success("Cart cleared");
   };
 
   return (
@@ -98,7 +96,6 @@ const CartPage = () => {
             <h3 className="text-2xl font-bold">
               Total: ${getTotalPrice().toFixed(2)}
             </h3>
-
             <div className="mt-4 space-x-4">
               <button
                 onClick={handleClearCart}

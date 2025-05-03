@@ -1,7 +1,7 @@
-// src/context/CartContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { CartItem } from "../types";
 
+// Define the context type for TypeScript
 interface CartContextType {
   cart: CartItem[];
   addToCart: (item: Omit<CartItem, "quantity">) => void;
@@ -10,35 +10,38 @@ interface CartContextType {
   clearCart: () => void;
 }
 
+// Create context
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+// Provider component
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const addToCart = (item: Omit<CartItem, "quantity">) => {
-    setCart((prev) => {
-      const existing = prev.find((i) => i.id === item.id);
-      if (existing) {
-        return prev.map((i) =>
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((i) => i.id === item.id);
+      if (existingItem) {
+        return prevCart.map((i) =>
           i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
         );
-      } else {
-        return [...prev, { ...item, quantity: 1 }];
       }
+      return [...prevCart, { ...item, quantity: 1 }];
     });
   };
 
   const removeFromCart = (id: string) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
   const updateQuantity = (id: string, quantity: number) => {
-    setCart((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, quantity } : item))
+    setCart((prevCart) =>
+      prevCart.map((item) => (item.id === id ? { ...item, quantity } : item))
     );
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+  };
 
   return (
     <CartContext.Provider
@@ -49,6 +52,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// Hook to use cart context
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {

@@ -1,5 +1,4 @@
 // src/context/WishlistContext.tsx
-
 import React, {
   createContext,
   useContext,
@@ -7,7 +6,7 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
-import { Product } from "../types"; // Make sure this exists and exports Product interface
+import { Product } from "../types";
 
 interface WishlistContextType {
   wishlist: Product[];
@@ -36,7 +35,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
 
   const addToWishlist = (product: Product) => {
     setWishlist((prev) =>
-      prev.find((p) => p.id === product.id) ? prev : [...prev, product]
+      prev.some((p) => p.id === product.id) ? prev : [...prev, product]
     );
   };
 

@@ -24,6 +24,7 @@ const ProductDetailPage = () => {
   }
 
   const isInWishlist = wishlist.some((item) => item.id === product.id);
+
   const handleWishlistToggle = () => {
     if (isInWishlist) {
       removeFromWishlist(product.id);
@@ -32,6 +33,11 @@ const ProductDetailPage = () => {
       addToWishlist(product);
       toast.success("Added to wishlist");
     }
+  };
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    toast.success("Added to cart");
   };
 
   return (
@@ -74,10 +80,7 @@ const ProductDetailPage = () => {
         {/* Action Buttons */}
         <div className="space-x-4 mt-6">
           <button
-            onClick={() => {
-              addToCart(product);
-              toast.success("Added to cart");
-            }}
+            onClick={handleAddToCart}
             className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
           >
             Add to Cart
