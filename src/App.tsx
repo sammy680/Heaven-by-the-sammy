@@ -19,6 +19,7 @@ import AuthPage from "./pages/AuthPage";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProfilePage from "./pages/UserProfilePage";
+import OrdersPage from "./pages/OrderPage";
 const App: React.FC = () => {
   return (
     <AuthProvider>
@@ -29,6 +30,15 @@ const App: React.FC = () => {
             <Navbar />
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
               <Routes>
+                import OrdersPage from "./pages/OrdersPage"; // Add this
+                <Route
+                  path="/orders"
+                  element={
+                    <ProtectedRoute>
+                      <OrdersPage />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route
                   path="/checkout"
                   element={
@@ -37,7 +47,6 @@ const App: React.FC = () => {
                     </ProtectedRoute>
                   }
                 />
-
                 <Route
                   path="/wishlist"
                   element={
@@ -46,7 +55,6 @@ const App: React.FC = () => {
                     </ProtectedRoute>
                   }
                 />
-
                 <Route
                   path="/profile"
                   element={
@@ -55,7 +63,6 @@ const App: React.FC = () => {
                     </ProtectedRoute>
                   }
                 />
-
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/profile" element={<UserProfilePage />} />

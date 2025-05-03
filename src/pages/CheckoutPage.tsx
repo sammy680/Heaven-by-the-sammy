@@ -31,6 +31,14 @@ const CheckoutPage = () => {
   };
 
   const handleCheckout = () => {
+    const existingOrders = JSON.parse(
+      localStorage.getItem("pastOrders") || "[]"
+    );
+    localStorage.setItem(
+      "pastOrders",
+      JSON.stringify([...existingOrders, cart])
+    );
+
     if (cart.length === 0) {
       toast.error("Your cart is empty!");
       return;
