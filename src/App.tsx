@@ -16,31 +16,63 @@ import LoginSignupPage from "./pages/LoginSignupPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import MyOrdersPage from "./pages/MyOrderPage";
 import AuthPage from "./pages/AuthPage";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import ProfilePage from "./pages/UserProfilePage";
 const App: React.FC = () => {
   return (
-    <WishlistProvider>
-      <CartProvider>
-        <Router>
-          <ScrollToTop />
-          <Navbar />
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <Routes>
-              <Route path="/auth" element={<AuthPage />} />
-              <Route path="/orders" element={<MyOrdersPage />} />
-              <Route path="/profile" element={<UserProfilePage />} />
-              <Route path="/auth" element={<LoginSignupPage />} />
-              <Route path="/order-success" element={<OrderSuccessPage />} />
-              <Route path="/" element={<HomePage />} />
-              <Route path="/product/:id" element={<ProductDetailPage />} />
-              <Route path="/wishlist" element={<WishlistPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-            </Routes>
-          </main>
-          <Toaster position="top-right" />
-        </Router>
-      </CartProvider>
-    </WishlistProvider>
+    <AuthProvider>
+      <WishlistProvider>
+        <CartProvider>
+          <Router>
+            <ScrollToTop />
+            <Navbar />
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <Routes>
+                <Route
+                  path="/checkout"
+                  element={
+                    <ProtectedRoute>
+                      <CheckoutPage />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/wishlist"
+                  element={
+                    <ProtectedRoute>
+                      <WishlistPage />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <ProfilePage />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/orders" element={<MyOrdersPage />} />
+                <Route path="/profile" element={<UserProfilePage />} />
+                <Route path="/auth" element={<LoginSignupPage />} />
+                <Route path="/order-success" element={<OrderSuccessPage />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/product/:id" element={<ProductDetailPage />} />
+                <Route path="/wishlist" element={<WishlistPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+              </Routes>
+            </main>
+            <Toaster position="top-right" />
+          </Router>
+        </CartProvider>
+      </WishlistProvider>
+    </AuthProvider>
   );
 };
 
