@@ -15,6 +15,7 @@ import OrderSuccessPage from "./pages/OrderSuccessPages";
 import LoginSignupPage from "./pages/LoginSignupPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import MyOrdersPage from "./pages/MyOrderPage";
+import AuthPage from "./pages/AuthPage";
 const App: React.FC = () => {
   return (
     <WishlistProvider>
@@ -24,6 +25,7 @@ const App: React.FC = () => {
           <Navbar />
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Routes>
+              <Route path="/auth" element={<AuthPage />} />
               <Route path="/orders" element={<MyOrdersPage />} />
               <Route path="/profile" element={<UserProfilePage />} />
               <Route path="/auth" element={<LoginSignupPage />} />
