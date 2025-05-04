@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-import { Product, dummyProducts } from "../data/ProductData";
+import dummyProducts from "../data/ProductData";
 
 interface Review {
   productId: string;

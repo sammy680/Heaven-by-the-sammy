@@ -59,7 +59,7 @@ const ProductDetailPage = () => {
         <div
           className="prose"
           dangerouslySetInnerHTML={{
-            __html: product.descriptionHtml || product.description,
+            __html: product.descriptionHtml || product.description || "",
           }}
         />
 

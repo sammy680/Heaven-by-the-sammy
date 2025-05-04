@@ -10,7 +10,7 @@ export type Product = {
   tags?: string[]; // Optional tags array
 }
 
-const dummyProducts: Product[] = [
+const dummyProducts = [
   {
     id: "1",
     title: "Classic White T-Shirt",

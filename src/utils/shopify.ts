@@ -33,9 +33,16 @@ const fetchProducts = async () => {
     const response = await axios.post(endpoint, { query });
 
     const rawProducts = response.data.data.products.edges;
-
+interface ShopifyProductNode {
+  featuredImage: any;
+  priceRange: any;
+  id: string;
+  title: string;
+  descriptionHtml: string;
+  // Add more fields if needed
+}
     // Optional: transform to simpler format
-    const formattedProducts = rawProducts.map(({ node }) => ({
+    const formattedProducts = rawProducts.map(({ node }: {node: ShopifyProductNode}) => ({
       id: node.id,
       title: node.title,
       description: node.descriptionHtml,
