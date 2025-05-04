@@ -11,6 +11,7 @@ interface Product {
   imageSrc: string;
 }
 
+
 const HomePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -47,6 +48,9 @@ const HomePage: React.FC = () => {
       <h1 className="text-3xl font-bold mb-6 text-center">
         Welcome to Heaven by The Sammy's
       </h1>
+      <div className="text-3xl font-bold underline text-blue-600">
+        Hello Tailwind!
+      </div>
 
       {products.length === 0 ? (
         <p className="text-center text-gray-600">

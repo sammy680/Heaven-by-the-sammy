@@ -21,6 +21,7 @@ import ProfileEditPage from "./pages/ProfileEditPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import OrdersPage from "./pages/OrderPage";
 
+
 const App: React.FC = () => {
   return (
     <AuthProvider>
