@@ -1,4 +1,3 @@
-// src/pages/WishlistPage.tsx
 import React from "react";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
@@ -28,15 +27,22 @@ const WishlistPage = () => {
           {wishlist.map((product) => (
             <div
               key={product.id}
-              className="border p-4 rounded-lg shadow-sm hover:shadow-md transition"
+              className="border p-4 rounded-lg shadow-sm hover:shadow-md transition bg-white"
             >
               <img
                 src={product.imageSrc || "/images/default-product.jpg"}
-                alt={product.title}
+                alt={product.title || "Wishlist product"}
                 className="w-full h-52 object-cover mb-3 rounded"
               />
-              <h2 className="text-lg font-semibold">{product.title}</h2>
-              <p className="text-gray-700 font-medium mb-1">₹{product.price}</p>
+              <h2
+                className="text-lg font-semibold truncate"
+                title={product.title}
+              >
+                {product.title || "Unnamed Product"}
+              </h2>
+              <p className="text-gray-700 font-medium mb-1">
+                ₹{product.price || "N/A"}
+              </p>
 
               <Link
                 to={`/product/${product.id}`}

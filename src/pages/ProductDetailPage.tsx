@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { dummyProducts, Product } from "../data/productData";
+import dummyProducts, { Product } from "../data/ProductData";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import toast from "react-hot-toast";
@@ -66,7 +66,7 @@ const ProductDetailPage = () => {
         {/* Tags Display */}
         {product.descriptionHtml && (
           <div className="flex flex-wrap gap-2">
-            {product.tags?.map((tag, index) => (
+            {product.tags?.map((tag: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined, index: React.Key | null | undefined) => (
               <span
                 key={index}
                 className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm"

@@ -1,4 +1,3 @@
-// Define the Product type
 export interface Product {
   id: string;
   title: string;
@@ -7,13 +6,11 @@ export interface Product {
   imageSrc: string;
 }
 
-// src/types.ts
-
 export interface CartItem {
   id: string;
   title: string;
   price: string;
   imageSrc: string;
   quantity: number;
-  descriptionHTML?: string;
+  descriptionHtml?: string; // Match the casing with Product
 }

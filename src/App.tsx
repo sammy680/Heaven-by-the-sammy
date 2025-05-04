@@ -17,17 +17,15 @@ import UserProfilePage from "./pages/UserProfilePage";
 import MyOrdersPage from "./pages/MyOrderPage";
 import AuthPage from "./pages/AuthPage";
 import { AuthProvider } from "./context/AuthContext";
-import ProfilePage from "./pages/UserProfilePage";
+import ProfileEditPage from "./pages/ProfileEditPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import OrdersPage from "./pages/OrderPage";
-import ProfileEditPage from "./pages/ProfileEditPage";
 
 const App: React.FC = () => {
   return (
     <AuthProvider>
-        <CartProvider>
-      <WishlistProvider>
-        <App/>
+      <CartProvider>
+        <WishlistProvider>
           <Router>
             <ScrollToTop />
             <Navbar />
@@ -39,9 +37,10 @@ const App: React.FC = () => {
                 <Route path="/product/:id" element={<ProductDetailPage />} />
                 <Route path="/order-success" element={<OrderSuccessPage />} />
                 <Route path="/auth" element={<AuthPage />} />
-                <Route path="/productPage" element = {<ProductPage/>} />
-                <Route path="/my-order" element = {<MyOrdersPage/>} />
-                
+                <Route path="/productPage" element={<ProductPage />} />
+                <Route path="/my-order" element={<MyOrdersPage />} />
+
+                {/* Protected Routes */}
                 <Route
                   path="/wishlist"
                   element={
@@ -94,8 +93,8 @@ const App: React.FC = () => {
             </main>
             <Toaster position="top-right" />
           </Router>
-      </WishlistProvider>
-        </CartProvider>
+        </WishlistProvider>
+      </CartProvider>
     </AuthProvider>
   );
 };

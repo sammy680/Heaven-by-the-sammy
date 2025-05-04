@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchProducts } from "../utils/shopify";
 import { useWishlist } from "../context/WishlistContext";
 
-// Define the Product type to avoid using 'any'
+// Define the Product type
 interface Product {
   id: string;
   title: string;
@@ -11,13 +11,12 @@ interface Product {
   imageSrc: string;
 }
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
 
-  // Fetch products on component mount
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -29,114 +28,84 @@ const HomePage = () => {
         setLoading(false);
       }
     };
-
     getProducts();
   }, []);
 
-  // Add product to wishlist
   const handleAddToWishlist = (product: Product) => {
-    const newProduct = {
-      id: product.id,
-      title: product.title,
-      descriptionHtml: product.descriptionHtml,
-      price: product.price,
-      imageSrc: product.imageSrc,
-    };
-    addToWishlist(newProduct);
+    addToWishlist(product);
   };
 
-  // Remove product from wishlist
   const handleRemoveFromWishlist = (productId: string) => {
     removeFromWishlist(productId);
   };
 
-  // Conditional rendering for loading, error, and product list
-  if (loading) {
-    return <p>Loading products...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
+  if (loading) return <p className="text-center py-6">Loading products...</p>;
+  if (error) return <p className="text-center text-red-500 py-6">{error}</p>;
 
   return (
-    <div>
-      <h1>Welcome to Heaven by The Sammy's</h1>
-      <div
-        className="product-list"
-        style={{ display: "flex", flexWrap: "wrap" }}
-      >
-        {products.length === 0 ? (
-          <p style={{ textAlign: "center", marginTop: "2rem" }}>
-            No products to display. Connect your Shopify store to fetch
-            products.
-          </p>
-        ) : (
-          products.map((product) => (
-            <div
-              key={product.id}
-              className="product-card"
-              style={{
-                margin: "1rem",
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                width: "250px",
-              }}
-            >
-              <img
-                src={product.imageSrc}
-                alt={product.title}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  borderTopLeftRadius: "8px",
-                  borderTopRightRadius: "8px",
-                }}
-              />
-              <h3>{product.title}</h3>
-              <p
-                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-                style={{ fontSize: "0.9rem", color: "#555" }}
-              />
-              <p>Price: ${product.price}</p>
-              <button
-                onClick={() => handleAddToWishlist(product)}
-                disabled={wishlist.some((item) => item.id === product.id)}
-                style={{
-                  backgroundColor: wishlist.some(
-                    (item) => item.id === product.id
-                  )
-                    ? "#ccc"
-                    : "#007bff",
-                  color: "#fff",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "5px",
-                  border: "none",
-                }}
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6 text-center">
+        Welcome to Heaven by The Sammy's
+      </h1>
+
+      {products.length === 0 ? (
+        <p className="text-center text-gray-600">
+          No products to display. Connect your Shopify store to fetch products.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {products.map((product) => {
+            const isInWishlist = wishlist.some(
+              (item) => item.id === product.id
+            );
+
+            return (
+              <div
+                key={product.id}
+                className="border rounded-lg overflow-hidden shadow-md p-4 flex flex-col justify-between"
               >
-                {wishlist.some((item) => item.id === product.id)
-                  ? "In Wishlist"
-                  : "Add to Wishlist"}
-              </button>
-              {wishlist.some((item) => item.id === product.id) && (
-                <button
-                  onClick={() => handleRemoveFromWishlist(product.id)}
-                  style={{
-                    marginTop: "0.5rem",
-                    backgroundColor: "#dc3545",
-                    color: "#fff",
-                    padding: "0.5rem 1rem",
-                    borderRadius: "5px",
-                    border: "none",
-                  }}
-                >
-                  Remove from Wishlist
-                </button>
-              )}
-            </div>
-          ))
-        )}
-      </div>
+                <img
+                  src={product.imageSrc}
+                  alt={product.title}
+                  className="w-full h-48 object-cover mb-4 rounded"
+                />
+                <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
+                <p
+                  className="text-sm text-gray-600 mb-2"
+                  dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+                />
+                <p className="text-sm font-medium mb-4">
+                  Price: ${product.price}
+                </p>
+
+                {!isInWishlist ? (
+                  <button
+                    onClick={() => handleAddToWishlist(product)}
+                    className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                  >
+                    Add to Wishlist
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      className="bg-gray-400 text-white py-2 px-4 rounded cursor-not-allowed mb-2"
+                      disabled
+                    >
+                      In Wishlist
+                    </button>
+                    <button
+                      onClick={() => handleRemoveFromWishlist(product.id)}
+                      className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
+                    >
+                      Remove from Wishlist
+                    </button>
+                  </>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

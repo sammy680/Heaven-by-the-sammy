@@ -2,28 +2,25 @@
 import React from "react";
 import { useWishlist } from "../context/WishlistContext";
 
+interface Product {
+  id: string;
+  title: string;
+  descriptionHtml: string;
+  price: string;
+  imageSrc: string;
+}
+
 interface ProductCardProps {
-  product: {
-    id: string;
-    title: string;
-    descriptionHtml: string;
-    price: string;
-    imageSrc: string;
-  };
-  addToWishlist: () => void;
+  product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToWishlist, removeFromWishlist, wishlist } = useWishlist();
 
-  const isProductInWishlist = wishlist.some((item) => item.id === product.id);
+  const isInWishlist = wishlist.some((item) => item.id === product.id);
 
-  const handleWishlistToggle = () => {
-    if (isProductInWishlist) {
-      removeFromWishlist(product.id); // Remove product from wishlist
-    } else {
-      addToWishlist(product); // Add product to wishlist
-    }
+  const toggleWishlist = () => {
+    isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product);
   };
 
   return (
@@ -31,19 +28,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <img
         src={product.imageSrc}
         alt={product.title}
-        className="w-full h-48 object-cover mb-2"
+        className="w-full h-48 object-cover mb-2 rounded"
       />
       <h2 className="text-xl font-bold mb-2">{product.title}</h2>
-      <p className="text-lg font-semibold">{product.price}</p>
+      <p className="text-lg font-semibold">${product.price}</p>
 
-      {/* Wishlist button */}
       <button
-        onClick={handleWishlistToggle}
+        onClick={toggleWishlist}
         className={`${
-          isProductInWishlist ? "bg-red-500" : "bg-gray-500"
+          isInWishlist ? "bg-red-500" : "bg-blue-600"
         } text-white py-2 px-4 rounded mt-2 w-full`}
       >
-        {isProductInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+        {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
       </button>
     </div>
   );

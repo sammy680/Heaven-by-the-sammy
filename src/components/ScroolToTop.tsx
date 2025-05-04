@@ -2,6 +2,10 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+/**
+ * Automatically scrolls to the top of the page
+ * whenever the route/pathname changes.
+ */
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 

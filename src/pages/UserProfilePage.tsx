@@ -1,31 +1,34 @@
-// src/pages/UserProfilePage.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+const UserProfilePage: React.FC = () => {
+  const { logout, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
-const { logout } = useAuth();
-const navigate = useNavigate();
-
-const handleLogout = () => {
-  logout(); // Clear login
-  navigate("/login"); // Redirect to login
-};
-
-const UserProfilePage = () => {
-  const { isAuthenticated } = useAuth();
-
-  console.log("Is Authenticated?", isAuthenticated); // Debug line
-
-  return <div>User Profile</div>;
-};
-  const SomeComponent = () => {
-    const { isAuthenticated, login, logout } = useAuth();
-
-    // use them safely here
-  };
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    address: "",
+  });
 
   const [isEditing, setIsEditing] = useState(false);
+
+  // Load from localStorage (simulate persistent user data)
+  useEffect(() => {
+    const stored = localStorage.getItem("userProfile");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        setUserData((prev) => ({
+          ...prev,
+          ...parsed,
+        }));
+      } catch (error) {
+        console.error("Error parsing profile:", error);
+      }
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,18 +36,27 @@ const UserProfilePage = () => {
   };
 
   const handleSave = () => {
+    localStorage.setItem("userProfile", JSON.stringify(userData));
     setIsEditing(false);
-    alert("Profile updated (not saved permanently – dummy data).");
+    alert("✅ Profile updated successfully!");
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
   };
 
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">👤 My Profile</h1>
 
-      <div className="space-y-4">
+      <div className="space-y-5">
         <div>
-          <label className="block text-sm font-medium">Name</label>
+          <label htmlFor="name" className="block mb-1 font-medium">
+            Name
+          </label>
           <input
+            id="name"
             type="text"
             name="name"
             value={userData.name}
@@ -57,8 +69,11 @@ const UserProfilePage = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium">Email</label>
+          <label htmlFor="email" className="block mb-1 font-medium">
+            Email
+          </label>
           <input
+            id="email"
             type="email"
             name="email"
             value={userData.email}
@@ -71,8 +86,11 @@ const UserProfilePage = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium">Address</label>
+          <label htmlFor="address" className="block mb-1 font-medium">
+            Address
+          </label>
           <input
+            id="address"
             type="text"
             name="address"
             value={userData.address}
@@ -83,14 +101,15 @@ const UserProfilePage = () => {
             }`}
           />
         </div>
-        <button
-          onClick={handleLogout}
-          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 mt-6"
-        >
-          Logout
-        </button>
 
-        <div className="mt-4 flex gap-4">
+        <div className="mt-6 flex flex-col sm:flex-row gap-4">
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+          >
+            Logout
+          </button>
+
           {isEditing ? (
             <button
               onClick={handleSave}
