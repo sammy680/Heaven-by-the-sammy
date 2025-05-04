@@ -1,46 +1,64 @@
-// src/components/ProductCard.tsx
 import React from "react";
+import { Link } from "react-router-dom";
+import { Product } from "../types";
+import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-
-interface Product {
-  id: string;
-  title: string;
-  descriptionHtml: string;
-  price: string;
-  imageSrc: string;
-}
+import { Heart, ShoppingCart } from "lucide-react";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, wishlist } = useWishlist();
 
   const isInWishlist = wishlist.some((item) => item.id === product.id);
 
-  const toggleWishlist = () => {
-    isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product);
+  const handleAddToCart = () => {
+    addToCart(product);
+  };
+
+  const handleWishlistToggle = () => {
+    if (isInWishlist) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
   };
 
   return (
-    <div className="product-card p-4 border rounded-lg shadow-md">
+    <div className="border rounded-lg p-4 shadow-md bg-white hover:shadow-lg transition">
       <img
-        src={product.imageSrc}
+        src={product.image}
         alt={product.title}
-        className="w-full h-48 object-cover mb-2 rounded"
+        className="w-full h-60 object-cover rounded-md mb-4"
       />
-      <h2 className="text-xl font-bold mb-2">{product.title}</h2>
-      <p className="text-lg font-semibold">${product.price}</p>
-
-      <button
-        onClick={toggleWishlist}
-        className={`${
-          isInWishlist ? "bg-red-500" : "bg-blue-600"
-        } text-white py-2 px-4 rounded mt-2 w-full`}
-      >
-        {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
-      </button>
+      <h2 className="text-lg font-semibold mb-2">{product.title}</h2>
+      <p className="text-gray-600 text-sm line-clamp-2 mb-2">
+        {product.description || "No description available."}
+      </p>
+      <div className="flex justify-between items-center mt-2">
+        <span className="text-lg font-bold">₹{product.price}</span>
+        <div className="flex gap-3">
+          <button
+            className="p-2 bg-gray-100 rounded-full hover:bg-gray-200"
+            onClick={handleWishlistToggle}
+          >
+            <Heart
+              className={`w-5 h-5 ${
+                isInWishlist ? "text-red-500 fill-red-500" : "text-gray-500"
+              }`}
+            />
+          </button>
+          <button
+            className="p-2 bg-gray-100 rounded-full hover:bg-gray-200"
+            onClick={() => addToCart(product)}
+          >
+            <ShoppingCart className="w-5 h-5 text-gray-600" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
