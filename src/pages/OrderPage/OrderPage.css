@@ -1,0 +1,53 @@
+/* OrderPage.css */
+
+.order-page {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.order-page__title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.order-page__empty {
+    text-align: center;
+    color: #999;
+    font-size: 18px;
+}
+
+.order-page__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.3s ease;
+}
+
+.order-card:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.order-card__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.order-card__details p {
+    margin: 5px 0;
+}
+
+.order-card__items ul {
+    padding-left: 20px;
+    margin: 10px 0 0;
+}

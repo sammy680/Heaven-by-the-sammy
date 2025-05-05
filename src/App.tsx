@@ -1,97 +1,69 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./pages/Navbar";
-import Footer from "./components/Footer";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css"; // Ensure this is the updated version of App.css
 
-// Context Providers
+// Importing pages
+import HomePage from "./pages/HomePage/HomePage";
+import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
+import AuthPage from "./pages/AuthPage/AuthPage";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import LoginSignupPage from "./pages/LoginSignupPage/LoginSignupPage";
+import MyOrderPage from "./pages/MyOrderPage/MyOrderPage";
+import OrderPage from "./pages/OrderPage/OrderPage";
+import OrderSuccessPage from "./pages/OrderSuccessPages/OrderSuccessPages";
+import ProductDetailPage from "./pages/ProductDetailPage/ProductDetailPage";
+import ProfileEditPage from "./pages/ProfileEditPage/ProfileEditPage";
+import WishlistPage from "./pages/WishlistPage/WishlistPage";
+import UserProfilePage from "./pages/UserProfilePage/UserProfilePage";
+
+// Importing Components
+import Navbar from "./pages/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./pages/ScrollToTop";
+import TawkToWidget from "./pages/TawkToWidget";
+
+// Importing context providers
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 
-// Pages
-import HomePage from "./pages/HomePage";
-import AboutUsPage from "./pages/AboutUsPage";
-import ProductDetailPage from "./pages/ProductDetailPage";
-import CartPage from "./pages/CartPage";
-import CheckoutPage from "./pages/CheckoutPage";
-import WishlistPage from "./pages/WishlistPage";
-import AuthPage from "./pages/AuthPage";
-import LoginSignupPage from "./pages/LoginSignupPage";
-import OrderPage from "./pages/OrderPage";
-import MyOrderPage from "./pages/MyOrderPage";
-import OrderSuccessPage from "./pages/OrderSuccessPages";
-import UserProfilePage from "./pages/UserProfilePage";
-import ProfileEditPage from "./pages/ProfileEditPage";
+// Optional: Import Analytics/Tracking/Other services here
 
-// Other Utility Components
-import ProtectedRoute from "./pages/ProtectedRoute";
-import TawkToWidget from "./pages/TawkToWidget";
-import ReviewForm from "./pages/ReviewForm";
-
-// Animation support (Lottie ready)
-import "aos/dist/aos.css";
-import AOS from "aos";
-import { useEffect } from "react";
-useEffect(() => {
-  AOS.init({
-    duration: 800,
-    once: true,
-  });
-}, []);
-
-const App = () => {
+const App: React.FC = () => {
   useEffect(() => {
-    AOS.init({ duration: 800, once: true });
+    // Any global setup can go here
+    console.log("App is loaded");
   }, []);
 
   return (
     <AuthProvider>
       <CartProvider>
         <WishlistProvider>
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-grow">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/about" element={<AboutUsPage />} />
-                <Route path="/product/:id" element={<ProductDetailPage />} />
-                <Route path="/cart" element={<CartPage />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
-                <Route path="/wishlist" element={<WishlistPage />} />
-                <Route path="/auth" element={<AuthPage />} />
-                <Route path="/login" element={<LoginSignupPage />} />
-                <Route path="/orders" element={<OrderPage />} />
-                <Route path="/my-orders" element={<MyOrderPage />} />
-                <Route path="/order-success" element={<OrderSuccessPage />} />
-                <Route path="/profile" element={<UserProfilePage />} />
-                <Route path="/profile/edit" element={<ProfileEditPage />} />
-                <Route
-                  path="/review"
-                  element={
-                    <ReviewForm
-                      productId={""}
-                      onSubmit={function (
-                        review: string,
-                        rating: number
-                      ): void {
-                        throw new Error("Function not implemented.");
-                      }}
-                    />
-                  }
-                />
-                <Route
-                  path="/products"
-                  element={
-                    <ProtectedRoute>
-                      <ProductPage />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </main>
-            <Footer />
+          <Router>
+            <ScrollToTop />
+            <div className="app-container">
+              <Navbar />
+              <main>
+                <Switch>
+                  {/* Define Routes for Pages */}
+                  <Route exact path="/" component={HomePage} />
+                  <Route path="/about-us" Component={AboutUsPage} />
+                  <Route path="/auth" Component={AuthPage} />
+                  <Route path="/checkout" Component={CheckoutPage} />
+                  <Route path="/login-signup" Component={LoginSignupPage} />
+                  <Route path="/my-orders" Component={MyOrderPage} />
+                  <Route path="/order/:id" Component={OrderPage} />
+                  <Route path="/order-success" Component={OrderSuccessPage} />
+                  <Route path="/product/:id" Component={ProductDetailPage} />
+                  <Route path="/profile-edit" Component={ProfileEditPage} />
+                  <Route path="/wishlist" Component={WishlistPage} />
+                  <Route path="/user-profile" Component={UserProfilePage} />
+                </Switch>
+              </main>
+              <Footer />
+            </div>
             <TawkToWidget />
-          </div>
+          </Router>
         </WishlistProvider>
       </CartProvider>
     </AuthProvider>
@@ -99,7 +71,3 @@ const App = () => {
 };
 
 export default App;
-function init(arg0: { duration: number; once: boolean; }) {
-  throw new Error("Function not implemented.");
-}
-

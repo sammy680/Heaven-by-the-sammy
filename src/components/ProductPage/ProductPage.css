@@ -1,0 +1,121 @@
+/* ProductPage.css */
+
+.product-page {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.product-image-section {
+    flex: 1;
+    text-align: center;
+}
+
+.product-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.product-info-section {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.product-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.product-rating {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #f39c12;
+}
+
+.review-count {
+    color: #888;
+    margin-left: 5px;
+}
+
+.product-price {
+    margin: 15px 0;
+    font-size: 1.4rem;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.current-price {
+    color: #000;
+    font-weight: 600;
+}
+
+.original-price {
+    color: #aaa;
+    text-decoration: line-through;
+}
+
+.product-description {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.product-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn.primary {
+    background-color: #000;
+    color: #fff;
+}
+
+.btn.primary:hover {
+    background-color: #333;
+}
+
+.btn.secondary {
+    background-color: transparent;
+    border: 2px solid #000;
+    color: #000;
+}
+
+.btn.secondary:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Responsive layout */
+@media (min-width: 768px) {
+    .product-page-wrapper {
+        flex-direction: row;
+    }
+
+    .product-image-section,
+    .product-info-section {
+        flex: 1;
+    }
+}

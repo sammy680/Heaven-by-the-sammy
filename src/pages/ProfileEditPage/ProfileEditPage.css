@@ -1,0 +1,58 @@
+/* ProfileEditPage.css */
+
+.profile-edit-section {
+    padding: 60px 20px;
+    background-color: #fafafa;
+}
+
+.profile-edit-container {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.profile-edit-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 26px;
+    color: #333;
+}
+
+.profile-edit-form .form-group {
+    margin-bottom: 20px;
+}
+
+.profile-edit-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #555;
+}
+
+.profile-edit-form input,
+.profile-edit-form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.btn.btn-save {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.btn.btn-save:hover {
+    background-color: #222;
+}

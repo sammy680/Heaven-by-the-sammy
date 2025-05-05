@@ -1,0 +1,16 @@
+/* HomePage.css */
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    background-color: #fefefe;
+    padding-top: 60px;
+}
+
+@media (max-width: 768px) {
+    .home-page {
+        gap: 40px;
+        padding-top: 40px;
+    }
+}

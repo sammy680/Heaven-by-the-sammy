@@ -1,54 +1,58 @@
-export interface ProductDataType {
+// src/data/ProductData.ts
+
+export interface Product {
   id: string;
-  title: string;
+  name: string;
   category: string;
-  image: string;
+  description: string;
   price: number;
-  isNew?: boolean;
-  isFeatured?: boolean;
+  imageUrl: string;
+  stock: number;
+  rating: number;
+  reviews: number;
 }
 
-const ProductData: ProductDataType[] = [
+export const productData: Product[] = [
   {
     id: '1',
-    title: 'Classic Oversized Tee',
-    category: 'T-Shirts',
-    image: '/images/products/tshirt1.jpg',
-    price: 1499,
-    isNew: true,
-    isFeatured: true,
+    name: 'Men\'s T-Shirt',
+    category: 'Clothing',
+    description: 'Comfortable cotton t-shirt in various sizes.',
+    price: 29.99,
+    imageUrl: '/images/products/tshirt1.jpg',
+    stock: 100,
+    rating: 4.5,
+    reviews: 120,
   },
   {
     id: '2',
-    title: 'Urban Street Hoodie',
-    category: 'Hoodies',
-    image: '/images/products/hoodie1.jpg',
-    price: 2499,
-    isNew: true,
+    name: 'Women\'s Dress',
+    category: 'Clothing',
+    description: 'Stylish and elegant dress for any occasion.',
+    price: 49.99,
+    imageUrl: '/images/products/dress1.jpg',
+    stock: 50,
+    rating: 4.7,
+    reviews: 85,
   },
   {
     id: '3',
-    title: 'Slim Fit Cargo Pants',
-    category: 'Bottoms',
-    image: '/images/products/cargo1.jpg',
-    price: 2199,
+    name: 'Running Shoes',
+    category: 'Footwear',
+    description: 'Lightweight and comfortable running shoes for men.',
+    price: 79.99,
+    imageUrl: '/images/products/shoes1.jpg',
+    stock: 30,
+    rating: 4.8,
+    reviews: 200,
   },
-  {
-    id: '4',
-    title: 'Distressed Denim Jacket',
-    category: 'Outerwear',
-    image: '/images/products/jacket1.jpg',
-    price: 2999,
-    isFeatured: true,
-  },
-  {
-    id: '5',
-    title: 'Chic Crop Top',
-    category: 'Tops',
-    image: '/images/products/croptop1.jpg',
-    price: 1299,
-    isNew: true,
-  },
+  // Add more products as needed
 ];
 
-export default ProductData;
+export const getProductById = (id: string): Product | undefined => {
+  return productData.find(product => product.id === id);
+};
+
+export const getProductsByCategory = (category: string): Product[] => {
+  return productData.filter(product => product.category === category);
+};

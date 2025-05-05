@@ -1,0 +1,91 @@
+/* ReviewForm.css */
+
+.review-form {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.review-form h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+.review-form .rating {
+    margin-bottom: 15px;
+}
+
+.review-form .rating label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.review-form .rating input {
+    width: 60px;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.review-form .comment {
+    margin-bottom: 20px;
+}
+
+.review-form .comment label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.review-form .comment textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.review-form .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.review-form .success {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.review-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.review-form button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.review-form p {
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+}
