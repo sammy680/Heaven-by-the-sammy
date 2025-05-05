@@ -1,95 +1,54 @@
-// src/data/productData.ts
-import { Product } from "../types";
+export interface ProductDataType {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  price: number;
+  isNew?: boolean;
+  isFeatured?: boolean;
+}
 
-const dummyProducts = [
+const ProductData: ProductDataType[] = [
   {
-    id: "1",
-    title: "Classic White T-Shirt",
-    price: "799",
-    image: "/images/sample.jpg",
-    imageSrc: "/images/sample.jpg",
-    category: "Men",
-    tags: ["cotton", "casual", "white"],
-    description: "Soft cotton t-shirt with a relaxed fit.",
-    descriptionHtml: "<p> This is <b>HTML</b> description. </p>", // Optional
+    id: '1',
+    title: 'Classic Oversized Tee',
+    category: 'T-Shirts',
+    image: '/images/products/tshirt1.jpg',
+    price: 1499,
+    isNew: true,
+    isFeatured: true,
   },
   {
-    id: "2",
-    title: "Oversized Hoodie - Black",
-    price: "1499",
-    image: "/images/sample.jpg",
-    imageSrc: "/images/sample.jpg",
-    category: "Unisex",
-    tags: ["hoodie", "black", "oversized"],
-    description: "Comfortable oversized hoodie for everyday wear.",
-    descriptionHtml: "<p> This is <b>HTML</b> description. </p>", // Optional
+    id: '2',
+    title: 'Urban Street Hoodie',
+    category: 'Hoodies',
+    image: '/images/products/hoodie1.jpg',
+    price: 2499,
+    isNew: true,
   },
   {
-    id: "3",
-    title: "Denim Jacket",
-    price: "2299",
-    image: "/images/sample.jpg",
-    imageSrc: "/images/sample.jpg",
-    category: "Men",
-    tags: ["denim", "jacket", "blue"],
-    description: "Classic blue denim jacket with button closure.",
-    descriptionHtml: "<p> This is <b>HTML</b> description. </p>", // Optional
+    id: '3',
+    title: 'Slim Fit Cargo Pants',
+    category: 'Bottoms',
+    image: '/images/products/cargo1.jpg',
+    price: 2199,
   },
   {
-    id: "4",
-    title: "Satin Midi Dress",
-    price: "1899",
-    image: "/images/sample.jpg",
-    imageSrc: "/images/sample.jpg",
-    category: "Women",
-    tags: ["dress", "party", "satin"],
-    description: "Elegant satin dress perfect for parties.",
-    descriptionHtml: "<p> This is <b>HTML</b> description. </p>", // Optional
+    id: '4',
+    title: 'Distressed Denim Jacket',
+    category: 'Outerwear',
+    image: '/images/products/jacket1.jpg',
+    price: 2999,
+    isFeatured: true,
   },
   {
-    id: "5",
-    title: "Graphic Crop Top",
-    price: "599",
-    image: "/images/sample.jpg",
-    imageSrc: "/images/sample.jpg",
-    category: "Women",
-    tags: ["graphic", "crop top", "casual"],
-    description: "Trendy crop top with unique graphic print.",
-    descriptionHtml: "<p> This is <b>HTML</b> description. </p>", // Optional
-  },
-  {
-    id: "6",
-    title: "Cargo Pants - Olive Green",
-    price: "1199",
-    image: "/images/sample.jpg",
-    imageSrc: "/images/sample.jpg",
-    category: "Men",
-    tags: ["cargo", "pants", "olive"],
-    description: "Multi-pocket cargo pants for utility and style.",
-    descriptionHtml: "<p> This is <b>HTML</b> description. </p>", // Optional
-  },
-  {
-    id: "7",
-    title: "Faux Leather Handbag",
-    price: "999",
-    image: "/images/sample.jpg",
-    imageSrc: "/images/sample.jpg",
-    category: "Accessories",
-    tags: ["bag", "faux leather", "women"],
-    description: "Stylish handbag made with premium faux leather.",
-    descriptionHtml: "<p> This is <b>HTML</b> description. </p>", // Optional
-  },
-  {
-    id: "8",
-    title: "Chunky Sneakers",
-    price: "1999",
-    image: "/images/sample.jpg",
-    imageSrc: "/images/sample.jpg",
-    category: "Unisex",
-    tags: ["shoes", "sneakers", "chunky"],
-    description: "Comfortable sneakers with a bold design.",
-    descriptionHtml: "<p> This is <b>HTML</b> description. </p>", // Optional
+    id: '5',
+    title: 'Chic Crop Top',
+    category: 'Tops',
+    image: '/images/products/croptop1.jpg',
+    price: 1299,
+    isNew: true,
   },
 ];
 
-export default dummyProducts;
+export default ProductData;

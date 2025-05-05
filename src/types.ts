@@ -18,3 +18,12 @@ export interface CartItem {
   quantity: number;
   descriptionHtml?: string; // Match the casing with Product
 }
+export interface ProductType {
+  [x: string]: string | undefined;
+  id: number;
+  name: string;
+  image: string;
+  price: string;
+  quantity?: number;
+}
+

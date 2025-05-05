@@ -1,64 +1,43 @@
+// src/components/ProductCard.tsx
 import React from "react";
 import { Link } from "react-router-dom";
-import { Product } from "../types";
-import { useCart } from "../context/CartContext";
-import { useWishlist } from "../context/WishlistContext";
-import { Heart, ShoppingCart } from "lucide-react";
+import { ProductType } from "../types";
+import ProductData from "../data/ProductData"; // if default export
 
 interface ProductCardProps {
-  product: Product;
+  product: ProductType;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { addToCart } = useCart();
-  const { addToWishlist, removeFromWishlist, wishlist } = useWishlist();
-
-  const isInWishlist = wishlist.some((item) => item.id === product.id);
-
-  const handleAddToCart = () => {
-    addToCart(product);
-  };
-
-  const handleWishlistToggle = () => {
-    if (isInWishlist) {
-      removeFromWishlist(product.id);
-    } else {
-      addToWishlist(product);
-    }
-  };
-
   return (
-    <div className="border rounded-lg p-4 shadow-md bg-white hover:shadow-lg transition">
-      <img
-        src={product.image}
-        alt={product.title}
-        className="w-full h-60 object-cover rounded-md mb-4"
-      />
-      <h2 className="text-lg font-semibold mb-2">{product.title}</h2>
-      <p className="text-gray-600 text-sm line-clamp-2 mb-2">
-        {product.description || "No description available."}
-      </p>
-      <div className="flex justify-between items-center mt-2">
-        <span className="text-lg font-bold">₹{product.price}</span>
-        <div className="flex gap-3">
-          <button
-            className="p-2 bg-gray-100 rounded-full hover:bg-gray-200"
-            onClick={handleWishlistToggle}
-          >
-            <Heart
-              className={`w-5 h-5 ${
-                isInWishlist ? "text-red-500 fill-red-500" : "text-gray-500"
-              }`}
-            />
-          </button>
-          <button
-            className="p-2 bg-gray-100 rounded-full hover:bg-gray-200"
-            onClick={() => addToCart(product)}
-          >
-            <ShoppingCart className="w-5 h-5 text-gray-600" />
+    <div
+      className="bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 overflow-hidden"
+      data-aos="zoom-in"
+    >
+      <Link to={`/product/${product.id}`} className="block">
+        {/* Product Image */}
+        <div className="w-full h-60 md:h-72 overflow-hidden bg-gray-100 flex items-center justify-center">
+          <img
+            src={product.image} // Replace with actual image path or use Shopify image CDN
+            alt={product.title}
+            className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+          />
+        </div>
+
+        {/* Product Details */}
+        <div className="p-4 text-center">
+          <h3 className="text-lg font-semibold mb-1">{product.title}</h3>
+          <p className="text-gray-600 mb-2">{product.category || "Category"}</p>
+          <p className="text-black font-bold text-xl">${product.price}</p>
+        </div>
+
+        {/* Add to Cart Button */}
+        <div className="px-4 pb-4">
+          <button className="w-full py-2 bg-black text-white rounded-md hover:bg-gray-800 transition duration-300">
+            Add to Cart
           </button>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

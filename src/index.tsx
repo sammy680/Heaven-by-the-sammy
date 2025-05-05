@@ -1,16 +1,19 @@
 import React from "react";
-import ReactDOM from "react-dom/client"; // Import from 'react-dom/client'
-import "./index.css";
+import ReactDOM from "react-dom/client";
 import App from "./App";
-import { CartProvider } from "./context/CartContext";
-import { WishlistProvider } from "./context/WishlistContext";
+import "./index.css"; // Global Tailwind & custom styles
+import { BrowserRouter } from "react-router-dom";
+import ScrollToTop from "./pages/ScroolToTop";// Scroll on route change
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+
+root.render(
   <React.StrictMode>
-    <CartProvider>
-      <WishlistProvider>
-        <App />
-      </WishlistProvider>
-    </CartProvider>
+    <BrowserRouter>
+      <ScrollToTop />
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );

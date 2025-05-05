@@ -1,49 +1,29 @@
 // src/context/AuthContext.tsx
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
-// Defining the AuthContextType with state and functions for login/logout
-type AuthContextType = {
-  isLoggedIn: boolean;
+interface AuthContextType {
+  isAuthenticated: boolean;
   login: () => void;
   logout: () => void;
-  isAuthenticated: boolean;
-};
+}
 
-// Creating the AuthContext with an initial value of 'undefined'
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// AuthProvider component that wraps the app and provides authentication state and methods
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Function to login and set the user as authenticated
-  const login = () => {
-    setIsAuthenticated(true);
-  };
-
-  // Function to logout and remove the user authentication
-  const logout = () => {
-    localStorage.removeItem("userEmail"); // Clear user email from localStorage (if needed)
-    setIsAuthenticated(false); // Set the user as unauthenticated
-  };
+  const login = () => setIsAuthenticated(true);
+  const logout = () => setIsAuthenticated(false);
 
   return (
-    <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        login,
-        logout,
-        isLoggedIn: isAuthenticated,
-      }}
-    >
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook to access AuthContext in any component
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used inside AuthProvider");
+  if (!context) throw new Error("useAuth must be used within an AuthProvider");
   return context;
 };

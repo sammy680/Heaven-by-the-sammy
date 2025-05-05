@@ -2,15 +2,15 @@ import React from "react";
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { ProductType } from "../types";
 
 const CartPage = () => {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
 
   const getTotalPrice = () =>
-    cart.reduce(
-      (total, item) => total + parseFloat(item.price) * item.quantity,
-      0
-    );
+    cart.reduce((total: number, item: ProductType) => {
+      return total + parseFloat(item.price) * item.quantity;
+    }, 0);
 
   const handleQuantityChange = (id: string, value: string) => {
     const qty = parseInt(value);
@@ -48,7 +48,7 @@ const CartPage = () => {
       ) : (
         <>
           <div className="space-y-6">
-            {cart.map((item) => (
+            {cart.map((item: { id: React.Key | null | undefined; imageSrc: string | undefined; title: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; price: string; quantity: string | number | readonly string[] | undefined; }) => (
               <div
                 key={item.id}
                 className="flex flex-col md:flex-row items-center border p-4 rounded-lg shadow-md"
@@ -118,3 +118,15 @@ const CartPage = () => {
 };
 
 export default CartPage;
+function updateQuantity(id: string, qty: number) {
+  throw new Error("Function not implemented.");
+}
+
+function removeFromCart(id: string) {
+  throw new Error("Function not implemented.");
+}
+
+function clearCart() {
+  throw new Error("Function not implemented.");
+}
+
