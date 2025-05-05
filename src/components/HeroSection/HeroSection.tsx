@@ -1,7 +1,7 @@
 import React from "react";
 import "./HeroSection.css"; // Separate CSS file for styling
 import { Link } from "react-router-dom";
-import heroAnimation from "../..assets/animation/hero.json"; // Optional Lottie animation
+import heroAnimation from "../../assets/animation/hero.json"; // Optional Lottie animation
 import Lottie from "lottie-react";
 
 const HeroSection: React.FC = () => {

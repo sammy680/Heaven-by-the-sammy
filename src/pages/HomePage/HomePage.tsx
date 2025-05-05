@@ -7,6 +7,7 @@ import Testimonials from "../../components/Testimonials/Testimonials";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
 import AOS from "aos";
+import ProductCard from "../components/ProductCard";
 import "aos/dist/aos.css";
 import "../styles/HomePage.css";
 

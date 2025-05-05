@@ -16,6 +16,7 @@ interface CartState {
   totalPrice: number;
 }
 
+
 type CartAction =
   | { type: "ADD_TO_CART"; payload: CartItem }
   | { type: "REMOVE_FROM_CART"; payload: string }

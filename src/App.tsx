@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css"; // Ensure this is the updated version of App.css
 
 // Importing pages
@@ -23,9 +24,14 @@ import ScrollToTop from "./pages/ScrollToTop";
 import TawkToWidget from "./pages/TawkToWidget";
 
 // Importing context providers
+
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
+import { useCart } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
+import {useHistory} from "react-router-dom";
+const history = useHistory();
+history.push("/some-path");
 
 // Optional: Import Analytics/Tracking/Other services here
 
@@ -34,6 +40,7 @@ const App: React.FC = () => {
     // Any global setup can go here
     console.log("App is loaded");
   }, []);
+  const navigate = useNavigate();
 
   return (
     <AuthProvider>
@@ -44,9 +51,9 @@ const App: React.FC = () => {
             <div className="app-container">
               <Navbar />
               <main>
-                <Switch>
+                <Routes>
                   {/* Define Routes for Pages */}
-                  <Route exact path="/" component={HomePage} />
+                  <Route path="/" Component={HomePage} />
                   <Route path="/about-us" Component={AboutUsPage} />
                   <Route path="/auth" Component={AuthPage} />
                   <Route path="/checkout" Component={CheckoutPage} />
@@ -58,7 +65,7 @@ const App: React.FC = () => {
                   <Route path="/profile-edit" Component={ProfileEditPage} />
                   <Route path="/wishlist" Component={WishlistPage} />
                   <Route path="/user-profile" Component={UserProfilePage} />
-                </Switch>
+                </Routes>
               </main>
               <Footer />
             </div>
